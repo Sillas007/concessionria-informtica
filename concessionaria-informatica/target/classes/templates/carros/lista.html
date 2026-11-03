@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="pt-BR" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Lista de Carros</title>
+    <style>
+        body { font-family: Arial, sans-serif; background-color: #f4f4f9; padding: 20px;}
+        table { width: 100%; border-collapse: collapse; margin-top: 20px;}
+        th, td { border: 1px solid #ddd; padding: 8px; text-align: left; }
+        th { background-color: #007bff; color: white; }
+        .btn { text-decoration: none; padding: 8px 15px; border-radius: 4px; color: white; }
+        .btn-primary { background-color: #007bff; }
+        .btn-primary:hover { background-color: #0056b3; }
+        .btn-warning { background-color: #ffc107; color: black;}
+        .btn-danger { background-color: #dc3545; }
+        .actions { display: flex; gap: 10px; }
+        .header { display: flex; justify-content: space-between; align-items: center; }
+        a {text-decoration: none; color: #007bff; }
+    </style>
+</head>
+<body>
+
+    <a th:href="@{/}">← Voltar à Home</a>
+
+    <div class="header">
+        <h1>Lista de Carros</h1>
+        <a th:href="@{/carros/novo}" class="btn btn-primary">Novo Carro</a>
+    </div>
+
+    <table>
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Modelo</th>
+                <th>Ano</th>
+                <th>Faixa de Preço</th>
+                <th>Ações</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr th:each="carro : ${carros}">
+                <td th:text="${carro.id}"></td>
+                <td th:text="${carro.modelo}"></td>
+                <td th:text="${carro.ano}"></td>
+                <td th:text="${carro.faixaPreco}"></td>
+                <td class="actions">
+                    <a th:href="@{/carros/editar/{id}(id=${carro.id})}" class="btn btn-warning">Editar</a>
+                    <a th:href="@{/carros/deletar/{id}(id=${carro.id})}" class="btn btn-danger" onclick="return confirm('Tem certeza que deseja deletar este carro?')">Deletar</a>
+                </td>
+            </tr>
+            <tr th:if="${#lists.isEmpty(carros)}">
+                <td colspan="5" style="text-align: center;">Nenhum carro cadastrado.</td>
+            </tr>
+        </tbody>
+    </table>
+
+</body>
+</html>

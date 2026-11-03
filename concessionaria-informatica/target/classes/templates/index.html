@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="pt-BR" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Página Inicial</title>
+    <style>
+        body { font-family: Arial, sans-serif; display: flex; flex-direction: column; align-items: center; margin-top: 50px; background-color: #f4f4f9;}
+        h1 { color: #333; }
+        .menu { margin-top: 20px; }
+        .menu a { text-decoration: none; padding: 15px 30px; margin: 10px; background-color: #007bff; color: white; border-radius: 5px; font-size: 18px;}
+        .menu a:hover { background-color: #0056b3; }
+    </style>
+</head>
+<body>
+
+    <h1>Bem-vindo ao Sistema de Cadastros</h1>
+
+    <div class="menu">
+        <a th:href="@{/carros}">Gerenciar Carros</a>
+        <a th:href="@{/computadores}">Gerenciar Computadores</a>
+    </div>
+
+</body>
+</html>

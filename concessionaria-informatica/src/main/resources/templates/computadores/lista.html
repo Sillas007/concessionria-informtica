@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="pt-BR" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Lista de Computadores</title>
+    <style>
+        body { font-family: Arial, sans-serif; background-color: #f4f4f9; padding: 20px;}
+        table { width: 100%; border-collapse: collapse; margin-top: 20px;}
+        th, td { border: 1px solid #ddd; padding: 8px; text-align: left; }
+        th { background-color: #28a745; color: white; }
+        .btn { text-decoration: none; padding: 8px 15px; border-radius: 4px; color: white; }
+        .btn-primary { background-color: #28a745; }
+        .btn-primary:hover { background-color: #218838; }
+        .btn-warning { background-color: #ffc107; color: black;}
+        .btn-danger { background-color: #dc3545; }
+        .actions { display: flex; gap: 10px; }
+        .header { display: flex; justify-content: space-between; align-items: center; }
+        a {text-decoration: none; color: #28a745; }
+    </style>
+</head>
+<body>
+
+    <a th:href="@{/}">← Voltar à Home</a>
+
+    <div class="header">
+        <h1>Lista de Computadores</h1>
+        <a th:href="@{/computadores/novo}" class="btn btn-primary">Novo Computador</a>
+    </div>
+
+    <table>
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Processador</th>
+                <th>Memória RAM</th>
+                <th>Armazenamento</th>
+                <th>Ações</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr th:each="computador : ${computadores}">
+                <td th:text="${computador.id}"></td>
+                <td th:text="${computador.processador}"></td>
+                <td th:text="${computador.ram}"></td>
+                <td th:text="${computador.armazenamento}"></td>
+                <td class="actions">
+                    <a th:href="@{/computadores/editar/{id}(id=${computador.id})}" class="btn btn-warning">Editar</a>
+                    <a th:href="@{/computadores/deletar/{id}(id=${computador.id})}" class="btn btn-danger" onclick="return confirm('Tem certeza que deseja deletar este computador?')">Deletar</a>
+                </td>
+            </tr>
+            <tr th:if="${#lists.isEmpty(computadores)}">
+                <td colspan="5" style="text-align: center;">Nenhum computador cadastrado.</td>
+            </tr>
+        </tbody>
+    </table>
+
+</body>
+</html>
